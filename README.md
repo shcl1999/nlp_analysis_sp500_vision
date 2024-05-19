@@ -59,7 +59,18 @@ The MAX approach is used here, as it helps identify the strongest match for each
 ***Alternative Approaches***
 
 1. **Average Similarity:** Calculate the average similarity score for each vision statement across all words in meta['UNK'].
+ ```
+similarity_averages = similarity_matrix.mean(axis=1) * 100
+```
 2. **Top-N Similarity:** Consider the top-N highest similarities and take an average.
+ ```
+top_n = 3  # Example for top-3 similarities
+similarity_top_n = np.sort(similarity_matrix, axis=1)[:, -top_n:].mean(axis=1) * 100
+```
 3. **Threshold-based Similarity:** Count how many similarities exceed a certain threshold.
+ ```
+threshold = 0.5  # Example threshold
+similarity_above_threshold = (similarity_matrix > threshold).sum(axis=1)
+```
 
 These alternative approaches provide different perspectives on the similarity analysis and can be chosen based on specific requirements.
